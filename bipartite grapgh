@@ -1,0 +1,25 @@
+int n = 100005;
+int col[n];
+memset(col , -1 , sizeof(col));
+bool checkbipartitebfs (int graph[][]  , int colour , int node  , int col[]){
+	col[node] = colour;
+	for(auto it:graph[node]){
+		if(col[it] == -1){
+			if(checkbipartitebfs(graph , !colour , it , col) == false) return false;
+		}
+		else{
+			if(col[it] == colour)
+				return false;
+		}
+	}
+	return true;
+}
+signed main(){
+	int n , m;
+	cin>>n>>m;
+	int graph[n][m];
+	for(int i =0;i<n;++i){
+		if(checkbipartitebfs(graph , 1 ,i , col) == false) return false;
+	}
+	return true;
+}
