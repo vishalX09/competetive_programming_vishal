@@ -1,0 +1,18 @@
+int n = 1000000;
+int sieve[n+1];
+void countprimesieve(){
+	for(int i 2;i<=n;++i){
+		sieve[i] = 1;
+	}
+
+	for(int i=2;i*i<=n;++i){
+		if(sieve[i] == 1){
+			for(int j = i*i;j<=n;j+=i){
+				if(sieve[j] != 0){
+					sieve[i]++;
+					sieve[j] = 0;
+				}
+			}
+		}
+	}
+}
