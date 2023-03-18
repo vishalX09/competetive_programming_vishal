@@ -1,0 +1,28 @@
+int spf[n];
+int nooffactor[n];
+int prinmefactors(int n){
+	int cnt = 0;
+	while(n != 1){
+		cnt++;
+		n = n/spf[n];
+		}
+	return cnt;
+}
+void smallestprimefactor(){
+	for(int i = 1 ;i<=n;++i){
+		spf[i] = i;
+
+	}
+	for(int i =2;i*i<=n;i++){
+		if(spf[i] == i){
+			for(int j = i*i;j<=n;j+=i){
+				if(spf[j] == j){
+					spf[j] = i;
+				}
+			}
+		}
+	}
+	for(int i = 2;i<=n;++i){
+		nooffactor[i] = prinmefactors(i);
+}
+}
