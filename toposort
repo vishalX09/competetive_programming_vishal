@@ -1,4 +1,4 @@
-	vector<int> findOrder(int V, vector<vector<int>> prerequisites)
+vector<int> findOrder(int V, vector<vector<int>> prerequisites)
 	{
 		vector<int> adj[V];
 		for (auto it : prerequisites) {
@@ -33,7 +33,5 @@
 				if (indegree[it] == 0) q.push(it);
 			}
 		}
-
-		if (topo.size() == V) return topo;
-		return {};
+            return topo;
 	}
