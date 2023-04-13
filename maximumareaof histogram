@@ -1,0 +1,75 @@
+int MAH(vector<int>&v)
+   {
+       int no=v.size();
+       stack<pair<int,int>>left;
+       stack<pair<int,int>>right;
+       vector<int>l;
+       vector<int>r;
+       int pseudo=-1;
+       int ri=no;
+       for(int i=0;i<no;i++)
+       {
+           if(left.size()==0)
+           {
+               l.push_back(pseudo);
+           }
+           else if(left.size()>0&&v[i]>left.top().first)
+           {
+               l.push_back(left.top().second);
+           }
+           else if(left.size()>0&&v[i]<=left.top().first)
+           {
+               while(left.size()>0&&left.top().first>=v[i])
+               {
+                   left.pop();
+               }
+               if(left.size()==0)
+               {
+                   l.push_back(pseudo);
+               }
+               else{
+                   l.push_back(left.top().second);
+               }
+           }
+           left.push({v[i],i});
+       }
+       for(int i=no-1;i>=0;i--)
+       {
+           if(right.size()==0)
+           {
+               r.push_back(ri);
+           }
+           else if(right.size()>0&&v[i]>right.top().first)
+           {
+               r.push_back(right.top().second);
+           }
+           else if(right.size()>0&&v[i]<=right.top().first)
+           {
+               while(right.size()>0&&right.top().first>=v[i])
+               {
+                   right.pop();
+               }
+               if(right.size()==0)
+               {
+                   r.push_back(ri);
+               }
+               else{
+                   r.push_back(right.top().second);
+               }
+           }
+           right.push({v[i],i});
+       }
+       reverse(r.begin(),r.end());
+       int maxi=INT_MIN;
+       vector<int>vec;
+       for(int i=0;i<no;i++)
+       {
+           vec.push_back(r[i]-l[i]-1);
+       }
+       for(int i=0;i<no;i++)
+       {
+           maxi=max(maxi,vec[i]*v[i]);
+       }
+       return maxi;
+       
+   }
