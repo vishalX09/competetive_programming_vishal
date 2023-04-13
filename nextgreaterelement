@@ -1,0 +1,40 @@
+vector<int> sr(vector<int>&a)
+{
+    int n=a.size();
+    vector<int>right;
+    stack<pair<int,int>>st;
+    int placeholder=n;
+    for(int i=n-1;i>=0;i--)
+    {
+        if(st.size()==0)
+        {
+            right.push_back(placeholder);
+            st.push({a[i],i});
+        }
+        else if(st.size()>0 && st.top().first<a[i])
+        {
+            right.push_back(st.top().second);
+            st.push({a[i],i});
+        }
+        else if(st.size()>0 && st.top().first>=a[i])
+        {
+            while(st.size()>0 && st.top().first>=a[i])
+            {
+                st.pop();
+            }
+            if(st.size()==0)
+            {
+                right.push_back(placeholder);
+                st.push({a[i],i});
+            }
+            else
+            {
+                 right.push_back(st.top().second);
+                 st.push({a[i],i});
+            }
+        }
+    }
+    reverse(right.begin(),right.end());
+    return right;
+    
+}
