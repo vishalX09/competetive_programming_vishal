@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define cpf(arr) for(auto it:arr)
+#define fo(i,s,e) for(long long  i=s;i<e;++i)
+#define cf(i,s,e) for(long long  i=s;i>=e;--i)
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define int long long
+const int m = 1e3+7;
+const int N = 1e3+7;
+const int mod = 1e9+7;
+long long pf[m][m]; // when we declare a global array so it automatically intiliaze with 0 
+int arr[N][N];
+signed main(){
+	int n;
+	cin>>n;
+	for(int i=1;i<=n;++i){
+		for(int j = 1;j<=n;++j){
+			cin>>arr[i][j];
+			pf[i][j] = arr[i][j] + pf[i-1][j]+pf[i][j-1] - pf[i-1][j-1];
+		}
+	}
+
+	int t;
+	cin>>t;
+	while(t--){
+		int a, b, c , d;
+		cin>>a>>b>>c>>d;
+		cout<<pf[c][d] - pf[a-1][d] - pf[c][b-1] + pf[a-1][b-1]<<endl;
+	}
+
+}
