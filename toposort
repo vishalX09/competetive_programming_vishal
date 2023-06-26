@@ -1,13 +1,6 @@
-vector<int> findOrder(int V, vector<vector<int>> prerequisites)
+vector<int> topoSort(int V, vector<int> adj[])
 	{
-		vector<int> adj[V];
-		for (auto it : prerequisites) {
-			adj[it[1]].push_back(it[0]);
-		}
-
-
-
-		vector<int> indegree(V , 0);
+		int indegree[V] = {0};
 		for (int i = 0; i < V; i++) {
 			for (auto it : adj[i]) {
 				indegree[it]++;
@@ -33,5 +26,6 @@ vector<int> findOrder(int V, vector<vector<int>> prerequisites)
 				if (indegree[it] == 0) q.push(it);
 			}
 		}
-            return topo;
+
+		return topo;
 	}
